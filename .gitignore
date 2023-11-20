@@ -12,6 +12,10 @@
 # next.js
 /.next/
 /out/
+/.swc/
+
+# prisma
+/prisma
 
 # production
 /build
