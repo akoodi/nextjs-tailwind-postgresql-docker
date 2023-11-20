@@ -9,6 +9,16 @@
 First, run the development server:
 
 ```bash
+# create a local .env file with the following properties:
+#
+# POSTGRES_USER=__username__
+# POSTGRES_PASSWORD=__pass__
+#
+# DATABASE_URL="postgresql://__username__:__pass__@local_pgdb:5432/quotes?schema=public"
+#
+# PGADMIN_DEFAULT_EMAIL=username@domain.com
+# PGADMIN_DEFAULT_PASSWORD=__pass__
+
 npm install
 
 # then

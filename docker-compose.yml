@@ -40,7 +40,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nextjs-tailwind
+    container_name: nextjs-tailwind-test
     ports:
       - '3000:3000'
     volumes:
