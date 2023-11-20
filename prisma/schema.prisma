@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x","debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x" ]
+  output = "../node_modules/.prisma/client"
+}
+
+//#datasource db {
+ // provider = "postgresql"
+  //url      = env("DATABASE_URL")
+//}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model authors {
+  author_id    Int            @id(map: "pk_authors") @default(autoincrement())
+  name         String?        @db.VarChar(100)
+  publications publications[]
+}
+
+model publications {
+  publication_id Int       @id(map: "pk_publications") @default(autoincrement())
+  author_id      Int?
+  title          String?   @db.VarChar(200)
+  year           DateTime? @db.Date
+  authors        authors?  @relation(fields: [author_id], references: [author_id], onDelete: Cascade, map: "fk_publications_authors")
+  quotes         quotes[]
+}
+
+model quotes {
+  quote_id       Int           @id(map: "pk_quotes") @default(autoincrement())
+  publication_id Int?
+  quote_text     String?
+  publications   publications? @relation(fields: [publication_id], references: [publication_id], onDelete: Cascade, map: "fk_quotes_publications")
+}
